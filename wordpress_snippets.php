@@ -32,4 +32,41 @@ function perfect_end ( $number, $titles, $show_number = 1 ){
         return ( $show_number ? "$number " : '' ) . $titles[ $title_index ];
     }
 
+
+//склонение слов
+require_once('../../phpmorphy-0.3.7/src/common.php');
+$dir = '../../phpmorphy-0.3.7/dicts';
+$lang = 'ru_RU';
+$opts = array(
+    'storage' => PHPMORPHY_STORAGE_FILE,
+);
+try {
+    $morphy = new phpMorphy($dir, $lang, $opts);
+} catch(phpMorphy_Exception $e) {
+    die('Error occured while creating phpMorphy instance: ' . $e->getMessage());
+}
+$_string = 'мужской букет из сладкой колбасы';
+$_string = mb_strtoupper($_string);
+
+$words = explode(' ', $_string);
+$excepted = ['клубники', "колбас"];
+
+echo 'доставка ';
+if(count($words)>0){
+foreach($words as $word) {
+
+  $forms = $morphy->getGramInfo(mb_strtoupper($word));
+  if(in_array(mb_strtolower($word),$excepted)){
+
+    $form[0] = $word;
+  }
+  else{
+    $form = $morphy->castFormByGramInfo(mb_strtoupper($word), null, [ 'РД', 'МН'], true);
+  }
+    $res = mb_strtolower($form[0]);
+  echo $res.' ';
+}
+}
+
+
 ?>
