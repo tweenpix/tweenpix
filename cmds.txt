@@ -1,0 +1,7 @@
+#оптимизация картинок
+
+#jpegoptim
+sudo -u www-data find -type f -iname "*.jpg" -exec jpegoptim --strip-all --all-progressive -Ppm90 {} \; -exec chmod 644 {} \;
+
+#optipng
+sudo -u www-data find -type f -iname "*.png" -exec optipng -strip all -o4 {} \;
