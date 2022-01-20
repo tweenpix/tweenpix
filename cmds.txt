@@ -9,3 +9,8 @@ sudo -u www-data find -type f -iname "*.png" -exec optipng -strip all -o4 {} \;
 
 #nginx css jss gzip
 find /home/www/ -type f -regextype posix-extended -regex '.*\.(css|js)' -exec gzip -k -v -9 -f {} \;
+
+
+#set permission
+find . -type d -exec chmod 0755 {} \; 
+find . -type f -exec chmod 0644 {} \; 
