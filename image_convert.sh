@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 for a in $( ls *.jpg)
 do
-jpegoptim --all-progressive -q75 -s -v -f $a $a
+jpegoptim --all-progressive -m75 -s -v -f $a $a
 done
  
 for i in $( ls *.jpg)
